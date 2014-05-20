@@ -1,0 +1,65 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'cargo'
+// apply plugin: 'checkstyle'
+
+// Just run gradle eclipse to set up the project - dont do gradle eclipseWtp
+
+repositories {
+	maven {
+		url "https://m2proxy.atlassian.com/content/groups/public/" 
+	}
+}
+
+dependencies {
+	// Uncomment the ones that you want
+
+	compile 'log4j:log4j:1.2.17'
+   	compile 'org.springframework:spring-webmvc:3.2.2.RELEASE'   
+   	// compile 'org.jboss.resteasy:RESTEASY-736-jetty:2.3.7.Final'
+   
+   	providedCompile 'javax.servlet:servlet-api:2.5'
+   	
+   	runtime 'taglibs:standard:1.1.2'  
+   	runtime 'javax.servlet:jstl:1.1.2'
+}
+
+/* Change context path (base url). otherwise defaults to name of project */
+jettyRunWar.contextPath = ''
+
+/* for cargo plugin */
+buildscript {
+    /*
+    repositories {
+        jcenter()
+    }*/
+
+    dependencies {
+        // classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
+        classpath fileTree(dir: '.', includes: ['gradle-cargo-plugin-1.5.jar'])
+    }
+}
+
+cargo {
+    containerId = 'jboss72x'
+    port = 8080
+    
+    deployable {
+        context = 'myawesomewebapp'
+    }
+    
+    local {
+        homeDir = file('/home/andy/jboss-eap-6.1')
+        output = file('build/output.log')
+        timeout = 60000
+
+        
+    }
+}
+
+/**
+checkstyle {
+       configFile = new File(rootDir, "config/checkstyle/checkstyle.xml")
+}*/
