@@ -1,9 +1,20 @@
-Readme file - any project info should go here.
+Sample project using spring mvc and boostrap
 
-Can be used by Git as welcome page.
+http://hostname.com/contextPath/servletPath/pathInfo
+- how to get the context path
+1.
+// somewhere on the top of your JSP
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-Test modify.
+...
+<a href="${contextPath}/admin/listPeople">Go to People List</a>
 
-Another test modify.
+Also had to add 
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+and
+remove DOCTYPE (2.4/3 specific)
 
-Yet another modification.
+TODO
+====
+1. Use tiles or sitemesh to remove duplication for website navigation etc.
+2. Read servlet spec.

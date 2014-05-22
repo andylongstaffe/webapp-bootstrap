@@ -2,21 +2,16 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'eclipse-wtp'
-apply plugin: 'cargo'
 // apply plugin: 'checkstyle'
 
 // Just run gradle eclipse to set up the project - dont do gradle eclipseWtp
 
-jettyRun.contextPath = 'myapp'
+//jettyRun.contextPath = 'myapp'
 
 repositories {
-//	maven {
-//		url "https://m2proxy.atlassian.com/content/groups/public/" 
-//	}
 	maven {
-                     name "mavenNexus"
-                     url "http://fastrep-dev:8081/nexus/content/groups/public/"
-    }             
+		url "https://m2proxy.atlassian.com/content/groups/public/" 
+	}
 }
 
 dependencies {
@@ -30,6 +25,7 @@ dependencies {
    	
    	runtime 'taglibs:standard:1.1.2'  
    	runtime 'javax.servlet:jstl:1.1.2'
+   	
 }
 
 /* Change context path (base url). otherwise defaults to name of project */
@@ -48,22 +44,6 @@ buildscript {
     }
 }
 
-cargo {
-    containerId = 'jboss72x'
-    port = 8080
-    
-    deployable {
-        context = 'myawesomewebapp'
-    }
-    
-    local {
-        homeDir = file('/home/andy/jboss-eap-6.1')
-        output = file('build/output.log')
-        timeout = 60000
-
-        
-    }
-}
 
 /**
 checkstyle {

@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <link rel="shortcut icon" href="/resources/images/favicon.ico">
 
     <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="res/css/starter-template.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -66,6 +66,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="res/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
