@@ -7,10 +7,16 @@ apply plugin: 'cargo'
 
 // Just run gradle eclipse to set up the project - dont do gradle eclipseWtp
 
+jettyRun.contextPath = 'myapp'
+
 repositories {
+//	maven {
+//		url "https://m2proxy.atlassian.com/content/groups/public/" 
+//	}
 	maven {
-		url "https://m2proxy.atlassian.com/content/groups/public/" 
-	}
+                     name "mavenNexus"
+                     url "http://fastrep-dev:8081/nexus/content/groups/public/"
+    }             
 }
 
 dependencies {
