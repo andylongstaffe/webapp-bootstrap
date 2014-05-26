@@ -57,6 +57,7 @@
         <p class="lead">This is a barebones starter template provided by bootstrap</p>
         <p><a href="bootstrap-themes.html">Bootstrap themes showcase</a> - Demo of many of the common boostrap components</p>
         <p><a href="sample/hello">HelloWorld page</a> - Using Spring MVC</p>
+        <p><a href="sample/form-demo">Demo Form</a> - Sample form for user input</p>
       </div>
 
     </div><!-- /.container -->

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 @Controller
-public class HelloController {
+public class SampleController {
 
-	Logger log = Logger.getLogger(HelloController.class);
+	Logger log = Logger.getLogger(SampleController.class);
 	
 	/**
    * The welcome page.
@@ -24,10 +24,16 @@ public class HelloController {
    */
   @RequestMapping("hello")
   public String loadHomePage(ModelMap model) {
-    log.info("INFO Running HelloController");
-    log.debug("DEBUG  Running HelloController");
+    log.info("INFO Running SampleController");
+    log.debug("DEBUG  Running SampleController");
 	model.addAttribute("message", "Spring 3 MVC Hello World");
     // return the name of the view
     return "hello";
   }
+  
+  @RequestMapping("form-demo")
+  public String loadForm(ModelMap model) {
+	  return "form-demo";
+  }
+  
 }
