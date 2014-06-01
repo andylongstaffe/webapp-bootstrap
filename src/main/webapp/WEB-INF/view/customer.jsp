@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@
 
 
 	<div class="container">
-		<form class="form-horizontal" role="form">
+		<form:form method="POST" action="/sample/addCustomer" class="form-horizontal" role="form" >
 			<h2>Sample Form</h2>
 
 			<div class="form-group">
@@ -62,18 +63,24 @@
 			</div>
 			<h3>Customer details</h3>
 			<div class="form-group">
-				<label for="firstName" class="control-label col-sm-2">First Name</label> <input type="text" class="col-sm-4" id="firstName" placeholder="Enter first name">
-				<label for="lastName" class="control-label col-sm-2">Last Name</label> <input type="text" class="col-sm-4" id="lastName" placeholder="Enter last name">
+				<form:label for="firstName" class="control-label col-sm-2" path="firstName">First Name</form:label> 
+				<form:input type="text" class="col-sm-4" id="firstName" placeholder="Enter first name" path="firstName"/>
+				<form:label for="lastName" class="control-label col-sm-2" path="lastName">Last Name</form:label> 
+				<form:input type="text" class="col-sm-4" id="lastName" placeholder="Enter last name" path="lastName"/>
+			</div>
+		
+			<div class="form-group">
+				<form:label path="address" for="address" class="control-label col-sm-2">Address</form:label> 
+				<form:input type="text" class="col-sm-10" id="address" placeholder="Enter address" path="address"/>
+			</div>
+		
+			<div class="form-group">
+				<form:label for="postcode" class="control-label col-sm-2" path="postcode">Postcode</form:label> 
+				<form:input type="text" class="col-sm-2" id="postcode" placeholder="Enter postcode" path="postcode"/>
 			</div>
 			<div class="form-group">
-				<label for="address" class="control-label col-sm-2">Address</label> <input type="text" class="col-sm-10" id="address" placeholder="Enter address">
-			</div>
-			<div class="form-group">
-				<label for="postcode" class="control-label col-sm-2">Postcode</label> <input type="text" class="col-sm-2" id="postcode" placeholder="Enter postcode">
-			</div>
-			<div class="form-group">
-				<label for="exampleInputEmail1" class="control-label col-sm-2">Email address</label> <input type="email" class="col-sm-6" id="exampleInputEmail1"
-					placeholder="Enter email">
+				<form:label for="exampleInputEmail1" class="control-label col-sm-2" path="emailAddress">Email address</form:label> 
+				<form:input type="email" class="col-sm-6" id="exampleInputEmail1" placeholder="Enter email" path="emailAddress"/>
 			</div>
 			<div class="form-group">
 				<label for="invoiceDate" class="control-label col-sm-2">Invoice date</label> <input type="datetime" class="col-sm-6" id=invoiceDate
@@ -94,7 +101,7 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary col-sm-1">Submit</button>
 			</div>
-		</form>
+		</form:form>
 	</div>
 	
 	<div class="container">
