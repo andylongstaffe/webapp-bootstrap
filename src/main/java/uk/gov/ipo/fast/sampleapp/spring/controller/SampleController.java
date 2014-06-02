@@ -1,14 +1,20 @@
 package uk.gov.ipo.fast.sampleapp.spring.controller;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.gov.ipo.fast.sampleapp.spring.model.Customer;
+import uk.gov.ipo.fast.sampleapp.spring.service.SampleService;
 
 /**
  * Main controller for this project.
@@ -20,6 +26,9 @@ import uk.gov.ipo.fast.sampleapp.spring.model.Customer;
 public class SampleController {
 
 	Logger log = Logger.getLogger(SampleController.class);
+	
+	@Autowired
+	SampleService service;
 	
 	/**
    * The welcome page.
@@ -43,14 +52,24 @@ public class SampleController {
   
   @RequestMapping(value = "customer", method = RequestMethod.GET)
   public ModelAndView customer() {
-	  return new ModelAndView("customer", "command", new Customer());
+	  return new ModelAndView("customer", "customer", new Customer());
   }
   
   @RequestMapping(value = "addCustomer", method = RequestMethod.POST)
-  public String addCustomer(@ModelAttribute("SpringWeb") Customer customer, ModelMap model)
+  public String addCustomer(@Valid Customer customer, BindingResult result, Model m)
   {
-	  model.addAttribute("c", customer);
-	  return "result";
+	  
+	  
+	  if ( result.hasErrors() )
+	  {
+		  log.info(result);
+		  return "customer";
+	  }
+	  else
+	  {
+		  m.addAttribute("c", customer);
+		  return "result";
+	  }  
   }
   
   @RequestMapping("test")

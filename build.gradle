@@ -19,6 +19,8 @@ dependencies {
 
 	compile 'log4j:log4j:1.2.17'
    	compile 'org.springframework:spring-webmvc:3.2.2.RELEASE'   
+   	compile 'javax.validation:validation-api:1.1.0.Final'
+   	compile 'org.hibernate:hibernate-validator:5.1.1.Final'
    	// compile 'org.jboss.resteasy:RESTEASY-736-jetty:2.3.7.Final'
    
    	providedCompile 'javax.servlet:servlet-api:2.5'

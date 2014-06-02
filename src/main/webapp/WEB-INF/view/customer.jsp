@@ -54,7 +54,7 @@
 
 
 	<div class="container">
-		<form:form method="POST" action="/sample/addCustomer" class="form-horizontal" role="form" >
+		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal" role="form" >
 			<h2>Sample Form</h2>
 
 			<div class="form-group">
@@ -62,32 +62,39 @@
 					placeholder="Enter invoice number">
 			</div>
 			<h3>Customer details</h3>
-			<div class="form-group">
+			<div class="form-group has-error">
 				<form:label for="firstName" class="control-label col-sm-2" path="firstName">First Name</form:label> 
-				<form:input type="text" class="col-sm-4" id="firstName" placeholder="Enter first name" path="firstName"/>
+				 <div class="col-sm-4">
+				<form:input type="text" class="form-control" id="firstName" placeholder="Enter first name" path="firstName"/>
+				
+				</div>
+				<form:errors path="firstName" class="control-label"/>
+			</div>
+			<div class="form-group">
 				<form:label for="lastName" class="control-label col-sm-2" path="lastName">Last Name</form:label> 
 				<form:input type="text" class="col-sm-4" id="lastName" placeholder="Enter last name" path="lastName"/>
+				<form:errors path="lastName"/>
 			</div>
 		
 			<div class="form-group">
 				<form:label path="address" for="address" class="control-label col-sm-2">Address</form:label> 
 				<form:input type="text" class="col-sm-10" id="address" placeholder="Enter address" path="address"/>
+				<form:errors path="address"/>
 			</div>
 		
 			<div class="form-group">
 				<form:label for="postcode" class="control-label col-sm-2" path="postcode">Postcode</form:label> 
 				<form:input type="text" class="col-sm-2" id="postcode" placeholder="Enter postcode" path="postcode"/>
+				<form:errors path="postcode"/>
 			</div>
 			<div class="form-group">
 				<form:label for="exampleInputEmail1" class="control-label col-sm-2" path="emailAddress">Email address</form:label> 
 				<form:input type="email" class="col-sm-6" id="exampleInputEmail1" placeholder="Enter email" path="emailAddress"/>
+				<form:errors path="emailAddress"/>
 			</div>
 			<div class="form-group">
 				<label for="invoiceDate" class="control-label col-sm-2">Invoice date</label> <input type="datetime" class="col-sm-6" id=invoiceDate
 					placeholder="Enter invoice date">
-			</div>
-			<div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-				<input class="span2" size="16" type="text" value="12-02-2012"> <span class="add-on"><i class="icon-th"></i></span>
 			</div>
 			<div class="form-group">
 				<div class="checkbox">
