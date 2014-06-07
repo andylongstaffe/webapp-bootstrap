@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,82 +53,36 @@
 		</div>
 	</div>
 
+	<spring:url value="/sample/addCustomer" var="formUrl" />
+	<spring:url value="/sample/customer.json" var="formJsonUrl" />
 
 	<div class="container">
-		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal" role="form" >
+		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal" role="form" id="addCustomer">
 			<h2>Sample Form</h2>
+
+			<c:if test="${successMessage !=  null}">
+				<h3>${successMessage}</h3>
+			</c:if>
 
 			<div class="form-group">
 				<label for="invoiceNumber" class="control-label col-sm-2">Invoice Number</label> <input type="text" class="col-sm-2" id="invoiceNumber"
 					placeholder="Enter invoice number">
 			</div>
 			<h3>Customer details</h3>
-			<div class="form-group has-error">
-				<form:label for="firstName" class="control-label col-sm-2" path="firstName">First Name</form:label> 
-				 <div class="col-sm-4">
-				<form:input type="text" class="form-control" id="firstName" placeholder="Enter first name" path="firstName"/>
-				
-				</div>
-				<form:errors path="firstName" class="control-label"/>
-			</div>
-			<div class="form-group">
-				<form:label for="lastName" class="control-label col-sm-2" path="lastName">Last Name</form:label> 
-				<form:input type="text" class="col-sm-4" id="lastName" placeholder="Enter last name" path="lastName"/>
-				<form:errors path="lastName"/>
-			</div>
-		
-			<div class="form-group">
-				<form:label path="address" for="address" class="control-label col-sm-2">Address</form:label> 
-				<form:input type="text" class="col-sm-10" id="address" placeholder="Enter address" path="address"/>
-				<form:errors path="address"/>
-			</div>
-		
-			<div class="form-group">
-				<form:label for="postcode" class="control-label col-sm-2" path="postcode">Postcode</form:label> 
-				<form:input type="text" class="col-sm-2" id="postcode" placeholder="Enter postcode" path="postcode"/>
-				<form:errors path="postcode"/>
-			</div>
-			<div class="form-group">
-				<form:label for="exampleInputEmail1" class="control-label col-sm-2" path="emailAddress">Email address</form:label> 
-				<form:input type="email" class="col-sm-6" id="exampleInputEmail1" placeholder="Enter email" path="emailAddress"/>
-				<form:errors path="emailAddress"/>
-			</div>
-			<div class="form-group">
-				<label for="invoiceDate" class="control-label col-sm-2">Invoice date</label> <input type="datetime" class="col-sm-6" id=invoiceDate
-					placeholder="Enter invoice date">
-			</div>
-			<div class="form-group">
-				<div class="checkbox">
-					<label class="col-sm-2"> </label> <input type="checkbox"> Online discount
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="notes" class="control-label col-sm-2">Notes</label>
-				<textarea id="notes" rows="3"></textarea>
-			</div>
+						
+			<html:inputField id="comment" label="Comment" placeholder="Enter comment" size="4"/>
+			<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4"/>
+			<html:inputField id="lastName" label="Last Name" placeholder="Enter last name" size="4"/>
+			<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4"/>
+			<html:inputField id="address" label="Address" placeholder="Enter address" size="4"/>
+			<html:inputField id="postcode" label="Postcode" placeholder="Enter postcode" size="4"/>
+
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary col-sm-1">Submit</button>
 			</div>
 		</form:form>
 	</div>
-	
-	<div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
+
 </div>
 
 	<!-- Bootstrap core JavaScript
@@ -135,5 +90,49 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../res/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+			function collectFormData(fields) {
+				var data = {};
+				for (var i = 0; i < fields.length; i++) {
+					var $item = $(fields[i]);
+					data[$item.attr('name')] = $item.val();
+				}
+				return data;
+			}
+				
+			$(document).ready(function() {
+				var $form = $('#addCustomer');
+				$form.bind('submit', function(e) {
+					// Ajax validation
+					var $inputs = $form.find('input');
+					var data = collectFormData($inputs);
+					
+					$.post('${formJsonUrl}', data, function(response) {
+						$form.find('.control-group').removeClass('error');
+						$form.find('.help-inline').empty();
+						$form.find('.alert').remove();
+						
+						if (response.status == 'FAIL') {
+							for (var i = 0; i < response.result.length; i++) {
+								var item = response.result[i];
+								var $controlGroup = $('#' + item.fieldName + 'ControlGroup');
+								$controlGroup.addClass('error');
+								$controlGroup.find('.help-inline').html(item.message);
+							}
+						} else {
+							alert('everything ok here!');
+							var $alert = $('<div class="alert"></div>');
+							$alert.html(response.result);
+							$alert.prependTo($form.find('fieldset'));
+							window.location.replace("/");
+						}
+					}, 'json');
+					
+					e.preventDefault();
+					return false;
+				});
+			});
+		</script>
 </body>
 </html>

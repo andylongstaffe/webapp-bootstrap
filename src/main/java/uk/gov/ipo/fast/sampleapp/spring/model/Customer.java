@@ -15,6 +15,9 @@ public class Customer {
 	private String lastName;
 	@NotEmpty
 	private String address;
+	@NotEmpty
+	private String comment;
+	
 	@Size(min=2,max=10)
 	private String postcode;
 	@Email @NotEmpty
@@ -50,5 +53,10 @@ public class Customer {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
-	
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }
