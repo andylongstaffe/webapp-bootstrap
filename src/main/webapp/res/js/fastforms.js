@@ -8,7 +8,7 @@ function collectFormData(fields) {
 }
 				
 $(document).ready(function() {
-	var $form = $('#addCustomer');
+	var $form = $('.errorsForm');
 	$form.bind('submit', function(e) {
 		// Ajax validation
 		var $inputs = $form.find('input');

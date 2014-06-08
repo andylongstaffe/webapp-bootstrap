@@ -53,14 +53,12 @@
 		</div>
 	</div>
 
-	<spring:url value="/sample/addCustomer" var="formUrl" />
-	<spring:url value="/sample/customer.json" var="formJsonUrl" />
 	<script type="text/javascript">
-		var formJsonUrl = "/webapp-bootstrap/sample/customer.json";
+		var formJsonUrl = "<spring:url value="/sample/customer.json"/>";
 	</script>
 
 	<div class="container">
-		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal" role="form" id="addCustomer">
+		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal errorsForm" role="form" id="addCustomer">
 			<h2>Sample Form</h2>
 
 			<fieldset>
@@ -93,7 +91,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../res/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../res/js/customer.js"></script>
+	<script src="../res/js/fastforms.js"></script>
 
 </body>
 </html>
