@@ -1,0 +1,17 @@
+<taglib version="2.1" xmlns="http://java.sun.com/xml/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_1.xsd">
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.1</jsp-version>
+	<short-name>FastHtmlTags</short-name>
+	<uri>http://ipo.gov.uk/fast/tags/html</uri>
+	<display-name>Fast Html Tags</display-name>
+	<description>Tag library for fast forms</description>
+
+	<tag-file>
+		<name>inputField</name>
+		<path>/WEB-INF/tags/html/inputField.tag</path>
+	</tag-file>
+
+</taglib>

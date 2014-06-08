@@ -22,8 +22,16 @@ dependencies {
    	compile 'javax.validation:validation-api:1.1.0.Final'
    	compile 'org.hibernate:hibernate-validator:5.1.1.Final'
    	// compile 'org.jboss.resteasy:RESTEASY-736-jetty:2.3.7.Final'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    
    
    	providedCompile 'javax.servlet:servlet-api:2.5'
+   	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.2-b01'
+   	
+   	testCompile 'junit:junit-dep:4.11'
+   	testCompile 'org.mockito:mockito-core:1.9.5'
+   	testCompile 'javax.el:javax.el-api:3.0.1-b04'
    	
    	runtime 'taglibs:standard:1.1.2'  
    	runtime 'javax.servlet:jstl:1.1.2'

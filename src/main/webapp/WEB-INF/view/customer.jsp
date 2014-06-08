@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="html" uri="http://ipo.gov.uk/fast/tags/html"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,84 +55,45 @@
 
 	<spring:url value="/sample/addCustomer" var="formUrl" />
 	<spring:url value="/sample/customer.json" var="formJsonUrl" />
+	<script type="text/javascript">
+		var formJsonUrl = "/webapp-bootstrap/sample/customer.json";
+	</script>
 
 	<div class="container">
 		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal" role="form" id="addCustomer">
 			<h2>Sample Form</h2>
 
-			<c:if test="${successMessage !=  null}">
-				<h3>${successMessage}</h3>
-			</c:if>
+			<fieldset>
 
-			<div class="form-group">
-				<label for="invoiceNumber" class="control-label col-sm-2">Invoice Number</label> <input type="text" class="col-sm-2" id="invoiceNumber"
-					placeholder="Enter invoice number">
-			</div>
-			<h3>Customer details</h3>
-						
-			<html:inputField id="comment" label="Comment" placeholder="Enter comment" size="4"/>
-			<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4"/>
-			<html:inputField id="lastName" label="Last Name" placeholder="Enter last name" size="4"/>
-			<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4"/>
-			<html:inputField id="address" label="Address" placeholder="Enter address" size="4"/>
-			<html:inputField id="postcode" label="Postcode" placeholder="Enter postcode" size="4"/>
+				<div class="panel panel-default">
+					<div class="panel-heading">Customer details</div>
+					<div class="panel-body">
 
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary col-sm-1">Submit</button>
-			</div>
+						<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4" />
+						<html:inputField id="lastName" label="Last Name" placeholder="Enter last name" size="4" />
+						<html:inputField id="emailAddress" label="Email Address" placeholder="Enter email address" size="4" />
+						<html:inputField id="address" label="Address" placeholder="Enter address" size="4" />
+						<html:inputField id="postcode" label="Postcode" placeholder="Enter postcode" size="4" />
+
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Save changes</button>
+					<button type="reset" class="btn">Cancel</button>
+				</div>
+			</fieldset>
 		</form:form>
 	</div>
 
-</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../res/bootstrap/js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript">
-			function collectFormData(fields) {
-				var data = {};
-				for (var i = 0; i < fields.length; i++) {
-					var $item = $(fields[i]);
-					data[$item.attr('name')] = $item.val();
-				}
-				return data;
-			}
-				
-			$(document).ready(function() {
-				var $form = $('#addCustomer');
-				$form.bind('submit', function(e) {
-					// Ajax validation
-					var $inputs = $form.find('input');
-					var data = collectFormData($inputs);
-					
-					$.post('${formJsonUrl}', data, function(response) {
-						$form.find('.control-group').removeClass('error');
-						$form.find('.help-inline').empty();
-						$form.find('.alert').remove();
-						
-						if (response.status == 'FAIL') {
-							for (var i = 0; i < response.result.length; i++) {
-								var item = response.result[i];
-								var $controlGroup = $('#' + item.fieldName + 'ControlGroup');
-								$controlGroup.addClass('error');
-								$controlGroup.find('.help-inline').html(item.message);
-							}
-						} else {
-							alert('everything ok here!');
-							var $alert = $('<div class="alert"></div>');
-							$alert.html(response.result);
-							$alert.prependTo($form.find('fieldset'));
-							window.location.replace("/");
-						}
-					}, 'json');
-					
-					e.preventDefault();
-					return false;
-				});
-			});
-		</script>
+	<script src="../res/js/customer.js"></script>
+
 </body>
 </html>

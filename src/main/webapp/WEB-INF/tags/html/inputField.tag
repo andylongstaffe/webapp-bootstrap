@@ -3,10 +3,10 @@
 <%@ attribute name="label" required="true" rtexprvalue="true" %>
 <%@ attribute name="placeholder" required="true" rtexprvalue="true" %>
 <%@ attribute name="size" required="true" rtexprvalue="true" %>
-	<div class="form-group">
+	<div class="form-group" id="${id}ControlGroup">
 	<form:label for="${id}" class="control-label col-sm-2" path="${id}">${label}</form:label>
 		<div class="col-sm-${size}">
 			<form:input type="text" class="form-control" id="${id}" placeholder="${placeholder}" path="${id}"/>
 		</div>
-		<form:errors path="${id}" class="control-label"/>
+		<span class="help-block"><form:errors path="${id}" class="control-label"/></span>
 	</div>

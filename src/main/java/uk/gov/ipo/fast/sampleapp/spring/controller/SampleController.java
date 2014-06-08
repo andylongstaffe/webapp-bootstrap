@@ -1,5 +1,8 @@
 package uk.gov.ipo.fast.sampleapp.spring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -8,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.gov.ipo.fast.sampleapp.spring.model.Customer;
+import uk.gov.ipo.fast.sampleapp.spring.model.ErrorMessage;
 import uk.gov.ipo.fast.sampleapp.spring.service.SampleService;
 
 /**
@@ -53,6 +58,25 @@ public class SampleController {
   @RequestMapping(value = "customer", method = RequestMethod.GET)
   public ModelAndView customer() {
 	  return new ModelAndView("customer", "customer", new Customer());
+  }
+  
+  @RequestMapping(value="/customer.json",method=RequestMethod.POST)
+  public @ResponseBody ValidationResponse processForm (Model model, @Valid Customer customer, BindingResult result ) {
+   ValidationResponse res = new ValidationResponse();
+   if(!result.hasErrors()){
+     res.setStatus("SUCCESS");
+   }
+   else{
+	   res.setStatus("FAIL");
+		List<FieldError> allErrors = result.getFieldErrors();
+		List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
+		for (FieldError objectError : allErrors) {
+			errorMesages.add(new ErrorMessage(objectError.getField(), objectError.getField() + "  " + objectError.getDefaultMessage()));
+		}
+		res.setErrorMessageList(errorMesages);
+   }
+   // …
+   return res;
   }
   
   @RequestMapping(value = "addCustomer", method = RequestMethod.POST)
