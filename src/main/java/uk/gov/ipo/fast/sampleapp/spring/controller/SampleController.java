@@ -30,74 +30,82 @@ import uk.gov.ipo.fast.sampleapp.spring.service.SampleService;
 @Controller
 public class SampleController {
 
-	Logger log = Logger.getLogger(SampleController.class);
-	
-	@Autowired
-	SampleService service;
-	
-	/**
-   * The welcome page.
+  /**
    * 
-   * @param model
-   * @return
    */
+  private final Logger log = Logger.getLogger(SampleController.class);
+  /**
+   * 
+   */
+  @Autowired
+  private SampleService service;
+
+
+
   @RequestMapping("hello")
-  public String loadHomePage(ModelMap model) {
+  public final String loadHomePage(final ModelMap model) {
     log.info("INFO Running SampleController");
     log.debug("DEBUG  Running SampleController");
-	model.addAttribute("message", "Spring 3 MVC Hello World");
+    model.addAttribute("message", "Spring 3 MVC Hello World");
     // return the name of the view
     return "hello";
   }
-  
+
+
   @RequestMapping("form-demo")
   public String loadForm(ModelMap model) {
-	  return "form-demo";
+    return "form-demo";
   }
-  
+
   @RequestMapping(value = "customer", method = RequestMethod.GET)
   public ModelAndView customer() {
-	  return new ModelAndView("customer", "customer", new Customer());
+    return new ModelAndView("customer", "customer", new Customer());
   }
-  
-  @RequestMapping(value="/customer.json",method=RequestMethod.POST)
-  public @ResponseBody ValidationResponse processForm (Model model, @Valid Customer customer, BindingResult result ) {
-   ValidationResponse res = new ValidationResponse();
-   if(!result.hasErrors()){
-     res.setStatus("SUCCESS");
-   }
-   else{
-	   res.setStatus("FAIL");
-		List<FieldError> allErrors = result.getFieldErrors();
-		List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
-		for (FieldError objectError : allErrors) {
-			errorMesages.add(new ErrorMessage(objectError.getField(), objectError.getField() + "  " + objectError.getDefaultMessage()));
-		}
-		res.setErrorMessageList(errorMesages);
-   }
-   // …
-   return res;
+
+  /**
+   * anything
+   * @param model
+   * @param customer
+   * @param result
+   * @return
+   */
+  @RequestMapping(value = "/customer.json", method = RequestMethod.POST)
+  public @ResponseBody
+  ValidationResponse processForm(Model model, @Valid Customer customer,
+      BindingResult result) {
+    ValidationResponse res = new ValidationResponse();
+    if (!result.hasErrors()) {
+      res.setStatus("SUCCESS");
+    } else {
+      res.setStatus("FAIL");
+      List<FieldError> allErrors = result.getFieldErrors();
+      List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
+      for (FieldError objectError : allErrors) {
+        errorMesages.add(new ErrorMessage(objectError.getField(), objectError
+            .getField() + "  " + objectError.getDefaultMessage()));
+      }
+      res.setErrorMessageList(errorMesages);
+    }
+    // …
+    return res;
   }
-  
+
   @RequestMapping(value = "addCustomer", method = RequestMethod.POST)
-  public String addCustomer(@Valid Customer customer, BindingResult result, Model m)
-  {
-	  
-	  
-	  if ( result.hasErrors() )
-	  {
-		  log.info(result);
-		  return "customer";
-	  }
-	  else
-	  {
-		  m.addAttribute("c", customer);
-		  return "result";
-	  }  
+  public String addCustomer(@Valid Customer customer, BindingResult result,
+      Model m) {
+
+
+    if (result.hasErrors()) {
+      log.info(result);
+      return "customer";
+    } else {
+      m.addAttribute("c", customer);
+      return "result";
+    }
   }
-  
+
   @RequestMapping("test")
   public String testPage(ModelMap model) {
-	  return "test";
+    return "test";
   }
 }

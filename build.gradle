@@ -2,7 +2,8 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'eclipse-wtp'
-// apply plugin: 'checkstyle'
+apply plugin: 'checkstyle'
+apply plugin: 'cucumber'
 
 // Just run gradle eclipse to set up the project - dont do gradle eclipseWtp
 
@@ -25,6 +26,9 @@ dependencies {
     compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
     
+    compile 'info.cukes:cucumber-picocontainer:1.1.8'
+    compile 'info.cukes:cucumber-java:1.1.8'
+    compile 'info.cukes:cucumber-junit:1.1.8'
    
    	providedCompile 'javax.servlet:servlet-api:2.5'
    	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.2-b01'
@@ -54,8 +58,36 @@ buildscript {
     }
 }
 
+buildscript {
+      repositories {
+          mavenCentral()
+      }
 
-/**
+      dependencies {
+          classpath 'com.github.samueltbrown:gradle-cucumber-plugin:0.6'
+      }
+  }
+
+task temp {
+	println getProject().getBuildDir()
+}
+
+
+
 checkstyle {
        configFile = new File(rootDir, "config/checkstyle/checkstyle.xml")
-}*/
+       toolVersion=5.7
+       ignoreFailures = false
+       configProperties(suppressionsFile : "config/checkstyle/suppression.xml")       		       
+}
+
+cucumber {
+    formats = ['pretty','json:build/cucumber.json','junit:build/cucumber.xml']
+    glueDirs = ['src/cucumber/java']
+    featureDirs = ['src/cucumber/resources']
+    // tags = ['~@wip', '~@ignore', ]
+    tags = ['~@wip', '~@ignore']
+    monochrome = false
+    strict = false
+    dryRun = false
+}
