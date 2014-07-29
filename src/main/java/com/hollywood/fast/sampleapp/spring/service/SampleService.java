@@ -1,4 +1,4 @@
-package uk.gov.ipo.fast.sampleapp.spring.service;
+package com.hollywood.fast.sampleapp.spring.service;
 
 import javax.validation.Validator;
 

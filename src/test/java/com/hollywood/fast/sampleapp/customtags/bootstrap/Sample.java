@@ -1,4 +1,4 @@
-package uk.gov.ipo.fast.sampleapp.customtags.bootstrap;
+package com.hollywood.fast.sampleapp.customtags.bootstrap;
 
 import org.junit.Test;
 

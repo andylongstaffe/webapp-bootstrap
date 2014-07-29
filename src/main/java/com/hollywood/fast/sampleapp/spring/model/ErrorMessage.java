@@ -1,4 +1,4 @@
-package uk.gov.ipo.fast.sampleapp.spring.model;
+package com.hollywood.fast.sampleapp.spring.model;
 
 public class ErrorMessage {
 

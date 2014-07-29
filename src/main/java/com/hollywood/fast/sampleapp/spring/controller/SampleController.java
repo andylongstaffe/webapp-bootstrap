@@ -1,4 +1,4 @@
-package uk.gov.ipo.fast.sampleapp.spring.controller;
+package com.hollywood.fast.sampleapp.spring.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import uk.gov.ipo.fast.sampleapp.spring.model.Customer;
-import uk.gov.ipo.fast.sampleapp.spring.model.ErrorMessage;
-import uk.gov.ipo.fast.sampleapp.spring.service.SampleService;
+import com.hollywood.fast.sampleapp.spring.model.Customer;
+import com.hollywood.fast.sampleapp.spring.model.ErrorMessage;
+import com.hollywood.fast.sampleapp.spring.service.SampleService;
 
 /**
  * Main controller for this project.

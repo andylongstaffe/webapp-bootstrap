@@ -1,4 +1,4 @@
-package uk.gov.ipo.fast.sampleapp;
+package com.hollywood.fast.sampleapp;
 
 
 import org.junit.Assert;
