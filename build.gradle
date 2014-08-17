@@ -10,16 +10,16 @@ apply plugin: 'cucumber'
 //jettyRun.contextPath = 'myapp'
 
 repositories {
-	maven {
-		url "https://m2proxy.atlassian.com/content/groups/public/" 
-	}
+	mavenCentral()
 }
 
 dependencies {
 	// Uncomment the ones that you want
 
-	compile 'log4j:log4j:1.2.17'
-   	compile 'org.springframework:spring-webmvc:3.2.2.RELEASE'   
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+  compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+  
+   	compile 'org.springframework:spring-webmvc:4.0.3.RELEASE'   
    	compile 'javax.validation:validation-api:1.1.0.Final'
    	compile 'org.hibernate:hibernate-validator:5.1.1.Final'
    	// compile 'org.jboss.resteasy:RESTEASY-736-jetty:2.3.7.Final'
@@ -30,7 +30,7 @@ dependencies {
     compile 'info.cukes:cucumber-java:1.1.8'
     compile 'info.cukes:cucumber-junit:1.1.8'
    
-   	providedCompile 'javax.servlet:servlet-api:2.5'
+   	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
    	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.2-b01'
    	
    	testCompile 'junit:junit-dep:4.11'

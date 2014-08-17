@@ -1,5 +1,6 @@
 package com.hollywood.fast.sampleapp.customtags.bootstrap;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class Sample {
@@ -8,7 +9,7 @@ public class Sample {
   public void test() {
     String expected = "hello";
     String actual = "";
-    assertEquals(expected, actual);
+    Assert.assertEquals(expected, actual);
   }
 
 }

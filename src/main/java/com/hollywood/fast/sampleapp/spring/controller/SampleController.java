@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,7 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hollywood.fast.sampleapp.spring.model.Customer;
 import com.hollywood.fast.sampleapp.spring.model.ErrorMessage;
-import com.hollywood.fast.sampleapp.spring.service.SampleService;
+import com.hollywood.fast.sampleapp.spring.service.MessageService;
+import com.hollywood.fast.sampleapp.spring.service.impl.ValidationService;
 
 /**
  * Main controller for this project.
@@ -33,20 +36,20 @@ public class SampleController {
   /**
    * 
    */
-  private final Logger log = Logger.getLogger(SampleController.class);
+  private final Logger log = LoggerFactory.getLogger(SampleController.class);
   /**
    * 
    */
   @Autowired
-  private SampleService service;
-
-
+  private ValidationService service;
+  
+  @Autowired
+  private MessageService messageService;
 
   @RequestMapping("hello")
-  public final String loadHomePage(final ModelMap model) {
-    log.info("INFO Running SampleController");
-    log.debug("DEBUG  Running SampleController");
-    model.addAttribute("message", "Spring 3 MVC Hello World");
+  public final String hello(final ModelMap model) {
+    log.debug("Running hello");
+    model.addAttribute("message", messageService.getMessage());
     // return the name of the view
     return "hello";
   }
@@ -64,6 +67,7 @@ public class SampleController {
 
   /**
    * anything
+   * 
    * @param model
    * @param customer
    * @param result
@@ -96,7 +100,7 @@ public class SampleController {
 
 
     if (result.hasErrors()) {
-      log.info(result);
+      // log.info(result);
       return "customer";
     } else {
       m.addAttribute("c", customer);

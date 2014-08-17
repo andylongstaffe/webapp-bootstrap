@@ -55,7 +55,7 @@
     <div class="container">
       <div class="starter-template">
       	<h1>Hello, ${name}!</h1>
-		<p>Thats it</p>
+		<p>${message}</p>
       </div>
 
     </div><!-- /.container -->
