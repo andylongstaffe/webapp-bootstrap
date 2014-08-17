@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,20 +18,21 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
-import com.hollywood.fast.sampleapp.spring.service.impl.IntegrationMessageService;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.hollywood.fast.sampleapp" })
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-
   private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
-
-  @Bean
-  public MessageService messageService() {
-    return new IntegrationMessageService();
-  }
+  
+  //@Autowired
+  MessageService messageService;
+  private MessageServiceConfig messageServiceConfig;
+  
+  public AppConfig() {
+    logger.debug("Loading AppConfig");
+  }  
   
   @Bean
   public InternalResourceViewResolver viewResolver() {
