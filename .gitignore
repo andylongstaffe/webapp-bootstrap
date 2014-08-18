@@ -24,3 +24,4 @@ hs_err_pid*
 .project
 .settings/
 /log.out
+target/

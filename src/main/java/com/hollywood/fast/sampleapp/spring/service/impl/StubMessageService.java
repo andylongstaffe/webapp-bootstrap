@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Profile;
 
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
 
-public class IntegrationMessageService implements MessageService {
+public class StubMessageService implements MessageService {
 
-  private final Logger log = LoggerFactory.getLogger(IntegrationMessageService.class);
+  private final Logger log = LoggerFactory.getLogger(StubMessageService.class);
   
-  public IntegrationMessageService() {
-    log.debug("Setting up intergation message service");
+  public StubMessageService() {
+    log.debug("Setting up stub message service");
   }
 
   public String getMessage() {
-    return "Hello from integration message service";
+    return "Hello from the stub message service";
   }
 
 }

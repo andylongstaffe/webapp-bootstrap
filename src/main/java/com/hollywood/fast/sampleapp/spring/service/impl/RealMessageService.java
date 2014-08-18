@@ -8,16 +8,18 @@ import org.springframework.context.annotation.Profile;
 
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
 
-public class DevMessageService implements MessageService {
+public class RealMessageService implements MessageService {
 
-  private final Logger log = LoggerFactory.getLogger(DevMessageService.class);
+  private final Logger log = LoggerFactory.getLogger(RealMessageService.class);
+  private String url;
   
-  public DevMessageService() {
-    log.debug("Setting up development message service");
+  public RealMessageService(String restUrl) {
+    url = restUrl;
+    log.debug("Setting up real message service at " + restUrl);
   }
 
   public String getMessage() {
-    return "Hello from the development message service";
+    return "Hello from integration message service pointing at " + url;
   }
 
 }
