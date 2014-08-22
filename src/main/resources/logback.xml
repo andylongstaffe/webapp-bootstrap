@@ -1,4 +1,6 @@
 <configuration>
+  <property name="log.base" value="/home/andy/temp/log/webapp-bootstrap" />
+  
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <!-- encoders are assigned the type
          ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
@@ -6,18 +8,22 @@
       <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
     </encoder>
   </appender>  
+  
   <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>out.log</file>
+    <file>${log.base}/webapp-bootstrap.log</file>
     <append>false</append>
     <!-- encoders are assigned the type
          ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
     <encoder>
-      <pattern>%-4r %-5level %logger{35}: %msg%n</pattern>
+      <pattern>%date [%thread] %-5level %logger{35}: %msg%n</pattern>
     </encoder>
   </appender>        
+  
+  <logger name="com.hollywood.fast.sampleapp" level="DEBUG"/>   
+  
   <root level="INFO">
       <appender-ref ref="FILE" />
       <appender-ref ref="STDOUT" />
   </root>
-  <logger name="com.hollywood.fast.sampleapp" level="DEBUG"/>   
+  
 </configuration>

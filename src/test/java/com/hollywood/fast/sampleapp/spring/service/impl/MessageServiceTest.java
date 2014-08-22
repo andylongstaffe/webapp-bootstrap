@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import com.hollywood.fast.commons.configuration.impl.DefaultFastConfiguration;
+import com.hollywood.fast.sampleapp.configuration.AppConfig;
 import com.hollywood.fast.sampleapp.configuration.MessageServiceConfig;
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
 
@@ -39,7 +40,7 @@ public class MessageServiceTest {
     
     AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
     ctx.getEnvironment().setActiveProfiles(envtype);
-    ctx.register(MessageServiceConfig.class);
+    ctx.register(AppConfig.class);
     // ctx.scan("com.hollywood.fast.sampleapp.configuration");
     ctx.refresh();
 

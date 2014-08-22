@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hollywood.fast.commons.BuildInformation;
 import com.hollywood.fast.sampleapp.spring.model.Customer;
 import com.hollywood.fast.sampleapp.spring.model.ErrorMessage;
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
@@ -45,7 +46,14 @@ public class SampleController {
   
   @Autowired
   private MessageService messageService;
+  
+  @Autowired
+  private BuildInformation buildInfo;
 
+  public SampleController() {
+    log.debug("Creating sample controller");
+  }
+  
   @RequestMapping("hello")
   public final String hello(final ModelMap model) {
     log.debug("Running hello");
@@ -54,6 +62,22 @@ public class SampleController {
     return "hello";
   }
 
+  @RequestMapping("version")
+  public final String version(final ModelMap model) {
+    log.debug("Running version");
+    model.addAttribute("applicationName", getAppName());
+    model.addAttribute("versionNumber", getVersionNumber());
+    // return the name of the view
+    return "version";
+  }
+
+  private Object getAppName() {
+    return "default name";
+  }
+
+  private String getVersionNumber() {
+    return buildInfo.getVersion();
+  }
 
   @RequestMapping("form-demo")
   public String loadForm(ModelMap model) {

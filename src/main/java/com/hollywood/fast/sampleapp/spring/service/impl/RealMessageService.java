@@ -22,4 +22,4 @@ public class RealMessageService implements MessageService {
     return "Hello from integration message service pointing at " + url;
   }
 
-}
+} 

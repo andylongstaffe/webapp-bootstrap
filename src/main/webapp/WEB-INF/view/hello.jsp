@@ -54,7 +54,7 @@
 
     <div class="container">
       <div class="starter-template">
-      	<h1>Hello, ${name}!</h1>
+      	<h1>Hi Millie, ${name}!</h1>
 		<p>${message}</p>
       </div>
 

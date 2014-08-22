@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.hollywood.fast.commons.configuration.impl.DefaultFastConfiguration;
 import com.hollywood.fast.sampleapp.spring.service.MessageService;
@@ -13,23 +14,22 @@ import com.hollywood.fast.sampleapp.spring.service.impl.RealMessageService;
 import com.hollywood.fast.sampleapp.spring.service.impl.StubMessageService;
 
 @Configuration
-public class MessageServiceConfig {
+@Profile("dev")
+public class StubMessageServiceConfig {
 
-  private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
+  private static final Logger logger = LoggerFactory.getLogger(StubMessageServiceConfig.class);
   
-  @Autowired DefaultFastConfiguration mainConfig;
+  @Autowired
+  DefaultFastConfiguration mainConfig;
   
   @Bean
-  MessageService messageService() throws ConfigurationException {
-    String envType = mainConfig.getCurrentEnv();
-    logger.debug("MessageServiceConfig: messageService bean envtype is " + envType);
-    if ( "dev".equals(envType) ) {
-      return new StubMessageService();
-    }
-    else {
-      String restUrl = mainConfig.getConfig().getString("app.sample.property");
-      return new RealMessageService(restUrl);
-    }
+  MessageService messageService() throws ConfigurationException {    
+    logger.debug("StubMessageServiceConfig : creating stub message service bean");  
+    return new StubMessageService();
+  }
+  
+  public StubMessageServiceConfig() {
+    logger.debug("Constructor for " + this.getClass().getSimpleName());  
   }
   
 }
