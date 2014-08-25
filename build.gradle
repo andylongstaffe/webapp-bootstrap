@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'eclipse-wtp'
-apply plugin: 'checkstyle'
 apply plugin: 'cucumber'
+apply plugin: 'checkstyle'
 
 // Just run gradle eclipse to set up the project - dont do gradle eclipseWtp
 
@@ -18,9 +18,11 @@ dependencies {
 	// Uncomment the ones that you want
 
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
-  compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
   
-   	compile 'org.springframework:spring-webmvc:4.0.3.RELEASE'   
+   	compile ('org.springframework:spring-webmvc:4.0.3.RELEASE') {
+			exclude group: 'commons-logging', module: 'commons-logging'   	   
+	   }
    	compile 'javax.validation:validation-api:1.1.0.Final'
    	compile 'org.hibernate:hibernate-validator:5.1.1.Final'
    	// compile 'org.jboss.resteasy:RESTEASY-736-jetty:2.3.7.Final'
@@ -77,13 +79,11 @@ task temp {
 	println getProject().getBuildDir()
 }
 
-
-
 checkstyle {
-       configFile = new File(rootDir, "config/checkstyle/checkstyle.xml")
-       toolVersion=5.7
-       ignoreFailures = false
-       configProperties(suppressionsFile : "config/checkstyle/suppression.xml")       		       
+	configFile = new File(rootDir, "config/checkstyle/checkstyle.xml")
+	toolVersion=5.7
+	ignoreFailures = false
+	configProperties(suppressionsFile : "config/checkstyle/suppression.xml")
 }
 
 cucumber {
@@ -106,3 +106,12 @@ war {
         )     
     }
 }
+
+eclipse {
+	println 'Doing post eclipse actions'
+	project {
+		natures 'net.sf.eclipsecs.core.CheckstyleNature'
+		buildCommand 'net.sf.eclipsecs.core.CheckstyleBuilder'
+	}	
+}
+
