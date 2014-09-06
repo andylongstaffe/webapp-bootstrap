@@ -1,4 +1,4 @@
-package com.hollywood.fast.sampleapp.spring.controller;
+package com.hollywood.fast.sampleapp.spring.model;
 
 import java.util.List;
 

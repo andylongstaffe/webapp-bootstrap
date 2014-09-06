@@ -48,7 +48,7 @@ public class BuildInformation implements ServletContextAware {
     }    
     
     if ( errorReadingManifest ) {
-      versionNumber = "verionNumber from somewhere else";
+      versionNumber = "1.0.0-1234";
     }
   }
 

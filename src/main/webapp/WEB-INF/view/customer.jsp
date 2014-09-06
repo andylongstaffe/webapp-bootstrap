@@ -45,7 +45,7 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="/index.jsp">About</a></li>
+					<li><a href="${contextPath}/about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</div>
@@ -58,13 +58,12 @@
 	</script>
 
 	<div class="container">
-		<form:form method="POST" modelAttribute="customer" action="/sample/addCustomer" class="form-horizontal errorsForm" role="form" id="addCustomer">
+		<form:form method="POST" modelAttribute="customer" action="${contextPath}/customer" class="form-horizontal errorsForm" role="form" id="addCustomer">
 			<h2>Sample Form</h2>
 
 			<fieldset>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">Customer details</div>
 					<div class="panel-body">
 
 						<html:inputField id="firstName" label="First Name" placeholder="Enter first name" size="4" />

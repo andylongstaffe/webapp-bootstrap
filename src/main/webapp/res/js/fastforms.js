@@ -9,7 +9,7 @@ function collectFormData(fields) {
 				
 $(document).ready(function() {
 	var $form = $('.errorsForm');
-	$form.bind('submit', function(e) {
+	$form.bind('submit1', function(e) {
 		// Ajax validation
 		var $inputs = $form.find('input');
 		var data = collectFormData($inputs);

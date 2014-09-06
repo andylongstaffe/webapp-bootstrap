@@ -27,5 +27,12 @@
 <td>${c.emailAddress}</td>
 </tr>
 </table>
+<button id="editCustomer" name="${c.firstName}">Edit</button>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+   $("#editCustomer").click( function() {
+	  window.location.href="customer/" + this.name;  
+   });
+</script>
 </html>

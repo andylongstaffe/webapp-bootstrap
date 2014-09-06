@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.AbstractEnvironment;
 
-import com.hollywood.fast.sampleapp.spring.controller.SampleController;
+import com.hollywood.fast.sampleapp.spring.controller.CustomerController;
 
 public class ActiveProfileConfiguration implements ServletContextListener {
 

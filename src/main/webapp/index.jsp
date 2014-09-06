@@ -58,11 +58,11 @@
         <h2>Sample servlet</h2>
         <p><a href="bootstrap-themes.html">Bootstrap themes showcase</a> - Demo of many of the common boostrap components</p>
         <div class="container">
-        <p><a href="sample/version">Version info</a></p>
-        <p><a href="sample/hello">HelloWorld page</a> - Using Spring MVC</p>
-        <p><a href="sample/form-demo">Demo Form</a> - Sample form for user input</p>
-        <p><a href="sample/customer">Customer Form with form handling</a></p>
-         <p><a href="sample/test">Test Page</a> - For testing bits of code</p>
+        <p><a href="about">Version info</a></p>
+        <p><a href="message/hello">HelloWorld page</a> - Using Spring MVC</p>
+        <p><a href="demo/form">Demo Form</a> - Sample form for user input</p>
+        <p><a href="customer">Customer Form with form handling</a></p>
+         <p><a href="demo/test">Test Page</a> - For testing bits of code</p>
          </div>
       </div>
 

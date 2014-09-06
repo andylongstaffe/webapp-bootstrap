@@ -53,44 +53,12 @@
 			<!--/.nav-collapse -->
 		</div>
 	</div>
-
-	<div class="container">
-		<div class="starter-template">
-			<h1>Hi Millie, ${name}!</h1>
-			<p>${message}</p>
-			<p>
-				<button class="btn btn-primary" data-toggle="modal"
-					data-target="#mymodal">Cancel order</button>
-			<div class="modal fade" id="mymodal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<p>Are you sure you wish to cancel this order?</p>
-							<p>All order details will be lost.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-danger">Continue</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-			</p>
-		
-			
-<button class="btn btn-primary" id="submit" onclick="showwarning();">Submit</button>
-<div class="alert alert-danger fade in" role="alert" id="mywarning" style="display: none;">
-<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-<strong>Error</strong>
-You need to correct the errors below
-</div>
-
-		</div>
-
+	<div class="jumbotron">
+		<h1>About</h1>
+		<p>
+		<strong>App Name:</strong> ${applicationName}<br/>
+		<strong>Version Number:</strong> ${versionNumber}
+		</p>
 	</div>
 	<!-- /.container -->
 
@@ -101,13 +69,5 @@ You need to correct the errors below
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../res/bootstrap/js/bootstrap.min.js"></script>
-	
-	<script>
-	
-   function showwarning() {
-       console.log("hey");
-       $("#mywarning").show();
-   }
-</script>   
 </body>
 </html>
